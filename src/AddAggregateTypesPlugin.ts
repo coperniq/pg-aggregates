@@ -17,12 +17,12 @@ const AddAggregateTypesPlugin: Plugin = (builder) => {
       newWithHooks,
       graphql: {
         GraphQLObjectType,
-        GraphQLList,
-        GraphQLString,
+        GraphQLList
       },
       inflection,
       pgIntrospectionResultsByKind,
       pgOmit: omit,
+      getTypeByName,
     } = build;
 
     pgIntrospectionResultsByKind.class.forEach((table: PgClass) => {
@@ -39,6 +39,11 @@ const AddAggregateTypesPlugin: Plugin = (builder) => {
         return;
       }
 
+      const GrapqhQLJSON = getTypeByName('JSON');
+      if (!GrapqhQLJSON) {
+        throw new Error('JSON scalar type is missing');
+      }
+
       /* const AggregateContainerType = */
       newWithHooks(
         GraphQLObjectType,
@@ -46,7 +51,7 @@ const AddAggregateTypesPlugin: Plugin = (builder) => {
           name: inflection.aggregateContainerType(table),
           fields: {
             keys: {
-              type: new GraphQLList(GraphQLString),
+              type: new GraphQLList(GrapqhQLJSON),
               resolver(parent: any) {
                 return parent.keys || [];
               },

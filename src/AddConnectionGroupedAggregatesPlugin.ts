@@ -115,7 +115,7 @@ const AddConnectionGroupedAggregatesPlugin: Plugin = (builder) => {
                   innerQueryBuilder.select(
                     () =>
                       sql.fragment`json_build_array(${sql.join(
-                        groupBy.map((b) => sql.fragment`(${b})::text`),
+                        groupBy.map((b) => sql.fragment`to_json(${b})`),
                         ", "
                       )})`,
                     "keys"
