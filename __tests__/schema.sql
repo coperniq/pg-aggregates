@@ -47,15 +47,16 @@ insert into films (name, year_of_release, box_office_in_billions, duration_in_mi
 
 create table players (
   id serial primary key,
-  name text not null
+  name text not null,
+  title text
 );
 
-insert into players (name) values
-  ('BenjieG'),
-  ('Purge'),
-  ('HollaDolla'),
-  ('Jmar25'),
-  ('JutheKid');
+insert into players (name, title) values
+  ('BenjieG', NULL),
+  ('Purge', NULL),
+  ('HollaDolla', 'Dolly'),
+  ('Jmar25', NULL),
+  ('JutheKid', NULL);
 
 create table matches (
   id serial primary key

@@ -18,7 +18,6 @@ const AddAggregateTypesPlugin: Plugin = (builder) => {
       graphql: {
         GraphQLObjectType,
         GraphQLList,
-        GraphQLNonNull,
         GraphQLString,
       },
       inflection,
@@ -47,7 +46,7 @@ const AddAggregateTypesPlugin: Plugin = (builder) => {
           name: inflection.aggregateContainerType(table),
           fields: {
             keys: {
-              type: new GraphQLList(new GraphQLNonNull(GraphQLString)),
+              type: new GraphQLList(GraphQLString),
               resolver(parent: any) {
                 return parent.keys || [];
               },
