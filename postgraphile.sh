@@ -1,6 +1,6 @@
 node \
   --inspect \
-  ../build/postgraphile/cli.js \
+  ./node_modules/postgraphile/cli.js \
   --append-plugins \
     `pwd`/node_modules/postgraphile-plugin-connection-filter,`pwd`/dist/index.js,`pwd`/__tests__/date_trunc_aggregate_group_specs_plugin.js \
   -c graphile_aggregates \

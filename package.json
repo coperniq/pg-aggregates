@@ -1,5 +1,5 @@
 {
-  "name": "@graphile/pg-aggregates",
+  "name": "@coperniq/pg-aggregates",
   "version": "0.1.1",
   "description": "Aggregates support for PostGraphile",
   "main": "dist/index.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/graphile/pg-aggregates.git"
+    "url": "git+https://github.com/coperniq/pg-aggregates.git"
   },
   "keywords": [
     "postgraphile",
