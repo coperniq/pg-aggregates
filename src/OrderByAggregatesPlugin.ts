@@ -7,7 +7,7 @@ type OrderBySpecIdentity =
   | SQL
   | ((options: { queryBuilder: QueryBuilder }) => SQL);
 
-type OrderSpec =
+export type OrderSpec =
   | [OrderBySpecIdentity, boolean]
   | [OrderBySpecIdentity, boolean, boolean];
 export interface OrderSpecs {
