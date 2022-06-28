@@ -1,6 +1,6 @@
 {
   "name": "@coperniq/pg-aggregates",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Aggregates support for PostGraphile",
   "main": "dist/index.js",
   "scripts": {
