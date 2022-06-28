@@ -173,20 +173,20 @@ export function orderByAscDesc(
   baseName: string,
   columnOrSqlFragment: OrderBySpecIdentity,
   unique = false,
-  nullsLast?: boolean
+  nullsFirst?: boolean
 ): OrderSpecs {
   return {
     [`${baseName}_ASC`]: {
       value: {
         alias: `${baseName}_ASC`,
-        specs: [[columnOrSqlFragment, true, nullsLast ?? true]],
+        specs: [[columnOrSqlFragment, true, nullsFirst ?? true]],
         unique,
       },
     },
     [`${baseName}_DESC`]: {
       value: {
         alias: `${baseName}_DESC`,
-        specs: [[columnOrSqlFragment, false, nullsLast ?? false]],
+        specs: [[columnOrSqlFragment, false, nullsFirst ?? false]],
         unique,
       },
     },
