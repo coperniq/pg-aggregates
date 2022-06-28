@@ -172,20 +172,21 @@ const OrderByAggregatesPlugin: Plugin = (builder) => {
 export function orderByAscDesc(
   baseName: string,
   columnOrSqlFragment: OrderBySpecIdentity,
-  unique = false
+  unique = false,
+  nullsLast?: boolean
 ): OrderSpecs {
   return {
     [`${baseName}_ASC`]: {
       value: {
         alias: `${baseName}_ASC`,
-        specs: [[columnOrSqlFragment, true]],
+        specs: [[columnOrSqlFragment, true, nullsLast || true]],
         unique,
       },
     },
     [`${baseName}_DESC`]: {
       value: {
         alias: `${baseName}_DESC`,
-        specs: [[columnOrSqlFragment, false]],
+        specs: [[columnOrSqlFragment, false, nullsLast || false]],
         unique,
       },
     },
