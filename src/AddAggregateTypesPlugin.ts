@@ -207,7 +207,7 @@ const AddAggregateTypesPlugin: Plugin = (builder) => {
                     pgQuery: (queryBuilder: QueryBuilder) => {
                       const args = parsedResolveInfoFragment.args;
                       // add ordering (if provided)
-                      // copy-paste of https://github.com/graphile/graphile-engine/blob/v4/packages/graphile-build-pg/src/plugins/PgConnectionArgOrderBy.js#L144-L171
+                      // slightly modified copy-paste of https://github.com/graphile/graphile-engine/blob/v4/packages/graphile-build-pg/src/plugins/PgConnectionArgOrderBy.js#L144-L171
                       const orders: Array<[SQL, boolean, boolean | undefined]> = [];
                       if (args.orderBy?.length) {
                         args.orderBy.forEach((item: { specs: OrderSpec | Array<OrderSpec>, unique: boolean }) => {
@@ -216,9 +216,11 @@ const AddAggregateTypesPlugin: Plugin = (builder) => {
                             .forEach(([col, ascending, specNullsFirst]) => {
                               const expr = typeof col === "string"
                                 ? sql.fragment`${queryBuilder.getTableAlias()}.${sql.identifier(
-                                  col
+                                  col as string
                                 )}`
-                                : col;
+                                : typeof col === "function"
+                                  ? (col as ((options: { queryBuilder: QueryBuilder }) => SQL))({ queryBuilder })
+                                  : col as SQL;
                               // If the enum specifies null ordering, use that
                               // Otherwise, use the orderByNullsLast option if present
                               const nullsFirst =
